@@ -1,0 +1,115 @@
+﻿<Window x:Class="projekt_serwatko.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:projekt_serwatko"
+        mc:Ignorable="d"
+        Title="BLACKJACK" Height="467" Width="800">
+    <Window.Resources>
+        <ResourceDictionary Source="Dictionary1.xaml"/>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-1">
+        <Canvas x:Name="tytul_canvas" HorizontalAlignment="Center" Height="389" VerticalAlignment="Center" Width="721" Margin="61,10,10,20" >
+            <Image HorizontalAlignment="Left" Height="380" VerticalAlignment="Top" Width="672" Canvas.Left="29" Canvas.Top="9" Source="images/aces.png">
+                <Image.Effect>
+                    <BlurEffect Radius="10"/>
+                </Image.Effect>
+            </Image>
+            <Button x:Name="graj_button" Content="Graj" Width="75" IsDefault="True" 
+                    Click="graj_button_Click" Canvas.Left="303" Canvas.Top="223"/>
+            <Image Height="100" Canvas.Left="155" Canvas.Top="123" Width="401" Source="images/blackjack.png">
+                <Image.Effect>
+                    <DropShadowEffect Color="White"/>
+                </Image.Effect>
+            </Image>
+            <Image x:Name="strzalka" HorizontalAlignment="Left" Height="59" VerticalAlignment="Top" Width="64" Source="images/strzalka.png" 
+                   Canvas.Left="-10" Canvas.Top="25" Visibility="Collapsed"/>
+        </Canvas>
+        <Canvas x:Name="zaklad_canvas" HorizontalAlignment="Center" Height="437" VerticalAlignment="Center" Width="792" Visibility="Collapsed">
+            <Canvas.Background>
+                <ImageBrush ImageSource="images/tlo.jpg" Opacity="0.7"/>
+            </Canvas.Background>
+            <Label Name="kwota_label" Content="Masz 1,000 zł" Canvas.Left="407" Canvas.Top="136" Foreground="White" FontSize="20"/>
+            <Label Content="Wybierz kwotę zakładu:" Canvas.Left="361" Canvas.Top="173" Foreground="White" FontSize="20"/>
+            <Slider x:Name="zaklad_slider" TickFrequency="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Minimum="0" 
+                    Canvas.Left="340" Canvas.Top="219" Width="207"/>
+            <Button x:Name="graj2_button" Content="Graj" Canvas.Left="439" Canvas.Top="259" Width="75" Click="graj2_button_Click" IsDefault="True"/>
+            <TextBox x:Name="zaklad_textbox" Height="23" Canvas.Left="552" TextWrapping="Wrap" 
+                     Text="{Binding ElementName=zaklad_slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="219" Width="50" IsEnabled="False"/>
+        </Canvas>
+        <Canvas x:Name="gra_canvas" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="792" Visibility="Collapsed">
+            <Canvas.Background>
+                <ImageBrush ImageSource="images/tlo.jpg" Opacity="0.7"/>
+            </Canvas.Background>
+            <Image Source="images/blue_back.png" x:Name="krupier1" Height="107" Canvas.Left="375" Canvas.Top="58" Width="78">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Image Source="images/blue_back.png" x:Name="krupier2" Height="107" Canvas.Left="512" Canvas.Top="58" Width="78">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Label Content="Karty krupiera" Canvas.Left="418" Canvas.Top="10" Foreground="White" FontSize="20"/>
+            <Label Content="Twoje karty" Canvas.Left="430" Canvas.Top="198" Foreground="White" FontSize="20"/>
+            <Image Source="images/blue_back.png" x:Name="gracz1" Height="107" Canvas.Left="375" Canvas.Top="240" Width="78">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Image Source="images/blue_back.png" x:Name="gracz2" Height="107" Canvas.Left="512" Canvas.Top="240" Width="78">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Image x:Name="gracz3" Height="107" Canvas.Left="255" Canvas.Top="240" Width="78">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Image x:Name="gracz4" Height="107" Canvas.Left="637" Canvas.Top="240" Width="78">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <Label Name="krupier_wynik_label" Content="wynik" Canvas.Left="464" Canvas.Top="96" Foreground="White"/>
+            <Label Name="gracz_wynik_label" Content="wynik" Canvas.Left="464" Canvas.Top="281" Foreground="White"/>
+            <Button x:Name="hit_button" Content="Hit" Canvas.Left="225" Canvas.Top="381" Width="75" Click="hit_button_Click"/>
+            <Button x:Name="stand_button" Content="Stand" Canvas.Left="375" Canvas.Top="381" Width="75" Click="stand_button_Click"/>
+            <Button x:Name="double_down_button" Content="Double Down" Canvas.Left="512" Canvas.Top="381" Width="91" Click="double_down_button_Click"/>
+            <Label Name="kwota_gracza_label" Content="kwota" Canvas.Left="291" Canvas.Top="180" Foreground="White"/>
+            <Label Name="zaklad_label" Content="zaklad" Canvas.Left="612" Canvas.Top="180" Foreground="White"/>
+            <Button x:Name="surrender_button" Content="Surrender" Canvas.Left="682" Canvas.Top="381" Width="75" Click="surrender_button_Click"/>
+        </Canvas>
+        <Canvas x:Name="wynik_canvas" HorizontalAlignment="Center" Height="100" Visibility="Collapsed"
+                VerticalAlignment="Center" Width="404" Margin="225,134,163,185" Background="White" OpacityMask="Black">
+            <Canvas.Effect>
+                <DropShadowEffect/>
+            </Canvas.Effect>
+            <Button x:Name="dalej_button" Content="Graj dalej" Canvas.Left="77" Canvas.Top="56" Width="75" Click="dalej_button_Click"/>
+            <Button x:Name="wyjdz_button" Content="Wyjdź" Canvas.Left="229" Canvas.Top="56" Width="75" Click="wyjdz_button_Click"/>
+            <TextBlock Name ="wygrana_label" Canvas.Left="126" TextWrapping="Wrap" Text="wynik" Canvas.Top="20" FontSize="20" FontWeight="Bold" Width="125" TextAlignment="Center"/>
+        </Canvas>
+        <Button Name="exit_button" Content="Wyjdź" HorizontalAlignment="Left" Margin="690,10,0,0" VerticalAlignment="Top" 
+                Width="75" IsCancel="True" Click="exit_button_Click" Visibility="Collapsed"/>
+        <Button x:Name="instrukcja_button" Content="Jak grać?" HorizontalAlignment="Left"
+                Margin="31,19,0,0" VerticalAlignment="Top" Width="75" Click="instrukcja_button_Click"/>
+        <Canvas x:Name="instrukcja_canvas" Canvas.Left="567" Canvas.Top="48" Margin="111,19,288,47" Background="#FFE6E4E4" Visibility="Collapsed">
+            <Canvas.Effect>
+                <DropShadowEffect/>
+            </Canvas.Effect>
+            <Label Content="Celem gry jest zdobycie liczby punktów jak najbliższej 21." HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="373" Foreground="#FF1EB22C" Canvas.Left="10" Canvas.Top="36"/>
+            <Label Content="Jak grać?" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="3.052,1.923" Canvas.Left="155" Canvas.Top="5"/>
+            <Label Content="?" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Foreground="Red" Canvas.Left="351" Canvas.Top="-11"/>
+            <Label Content="Na początku gracz dostaje dwie karty. Opcja HIT pozwala na &#xA;dobranie 2 kolejnych. " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="66" Width="373"/>
+            <Label Content="Opcja DOUBLE DOWN podwaja zakład, lecz ogranicza możliwe &#xA;użycie HIT do jednego razu." HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="113" Width="373"/>
+            <Label Content="Opcja STAND podsumowuje punkty i kończy rundę." HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="160" Width="373"/>
+            <Label Content="Opcja SURRENDER pozwala na poddanie rozgrywki tracąc jedynie &#xA;połowę zakładu." HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="191" Width="373"/>
+            <Label Content="Aby wygrać, gracz musi zdobyć liczbę punktów bliższą do 21 &#xA;od krupiera." HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="238" Width="373"/>
+            <Label Content="Karty z numerami punktowane są według numeru, karty z obrazami &#xA;warte są 10 punktów, a asy 11." HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="285" Width="373"/>
+            <Label Content="Jeśli liczba punktów przekroczy 21, rozgrywka kończy się przegraną." HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFCD0D0D" Canvas.Left="10" Canvas.Top="332" Width="373"/>
+        </Canvas>
+    </Grid>
+</Window>

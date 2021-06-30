@@ -1,0 +1,61 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <LinearGradientBrush x:Key="buttonBackground" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="red" Offset="0.0" />
+        <GradientStop Color="OrangeRed" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="activeButtonBackground" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#FF7FCBED" Offset="0.0" />
+        <GradientStop Color="#FFD3ECF9" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="buttonBorderBrush" Color="White" />
+    <SolidColorBrush x:Key="buttonForeground" Color="White" />
+    <SolidColorBrush x:Key="activeButtonForeground" Color="#FF004990" />
+
+    <DropShadowEffect x:Key="shadow" Color="Gray" ShadowDepth="0" Opacity="0.9" />
+
+    <ControlTemplate x:Key="button" TargetType="Button">
+        <Border x:Name="border"
+                Background="{StaticResource buttonBackground}"
+                BorderBrush="{StaticResource buttonBorderBrush}"
+                BorderThickness="3"
+                CornerRadius="6">
+            <TextBlock x:Name="content" Text="{TemplateBinding Content}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Foreground="{StaticResource buttonForeground}"
+                       TextWrapping="Wrap" TextAlignment="Center" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background"
+                        Value="{StaticResource activeButtonBackground}" />
+                <Setter TargetName="content" Property="Foreground"
+                        Value="{StaticResource activeButtonForeground}" />
+                <Setter TargetName="content" Property="FontWeight"
+                        Value="SemiBold" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="Gray" TargetName="border" />
+                <Setter Property="BorderBrush" Value="Gray" TargetName="border" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="content" Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform X="1" Y="1" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource button}" />
+        <Setter Property="Effect" Value="{StaticResource shadow}" />
+    </Style>
+    
+</ResourceDictionary>
+    
+    
